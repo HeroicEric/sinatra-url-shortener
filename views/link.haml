@@ -1,0 +1,10 @@
+%p
+  <a href="#{@link.long_url}">#{@link.long_url}</a> can now also be accessed via #{@link.bijou}
+
+%ul
+  %li
+    Original URL:
+    %a(href="#{@link.long_url}") #{@link.long_url}
+  %li
+    Bijou URL:
+    %a(href="/#{@link.short_url}") #{@link.short_url}

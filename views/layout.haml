@@ -1,0 +1,22 @@
+!!! 5
+%html
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+
+    %title Bijou URL Shortener		
+    %meta(name="description" content="")
+    %meta(name="author" content="Eric Kelly")
+
+    %link(rel="stylesheet" href="/css/reset.css")
+    %link(rel="stylesheet" href="/css/style.css")
+		
+    %body
+      #container
+        %h1 Bijou!
+
+        %form(action="/url" method="POST")
+          %input(type="text" name="url" placeholder="http://url.com")
+          %input(type="submit" value="Shorten")
+        #main
+          = yield
