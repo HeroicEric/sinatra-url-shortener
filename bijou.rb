@@ -14,6 +14,10 @@ class Link
   property :short_url,  String, :key => true
   property :created_at, DateTime
 
+  def self.valid_url?
+    long_url.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix)
+  end
+
   def self.gen_short_url
     # Create an Array of possible characters
     chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
@@ -33,6 +37,10 @@ class Link
   end
 end
 
+#################
+## Routes #######
+#################
+
 get '/' do
   haml :index
 end
@@ -46,7 +54,8 @@ end
 # Create a new Link with a Short URL!
 post '/url' do
   @link = Link.new(:long_url => params[:url], :short_url => Link.gen_short_url)
-  puts @link.long_url + " can b reached at " + @link.short_url
+
+  puts 
 
   if @link.save
     status 201 # Link saved successfully
@@ -69,7 +78,7 @@ get %r{/new/(.+)} do
 
   if @link.save
     status 201 # Link saved successfully
-    redirect "/url/#{@link.short_url}"
+    redirect '/url/' + @link.short_url
   else
     status 400 # Bad Request
     haml :index
