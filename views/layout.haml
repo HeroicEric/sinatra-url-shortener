@@ -14,9 +14,13 @@
     %body
       #container
         %h1 Bijou!
+        %h4 French for "jewel," also an adj. meaning small and elegant.
+
+        %p Type a long URL into the box below and watch it shrink!
 
         %form(action="/url" method="POST")
           %input(type="text" name="url" placeholder="http://url.com")
           %input(type="submit" value="Shorten")
+          %small It is important that you include the "http://" portion of the URL that you are trying to shrink (for now).
         #main
           = yield
