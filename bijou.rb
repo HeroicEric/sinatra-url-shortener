@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra'
-require 'data_mapper'
+require 'datamapper'
 require 'haml'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/bijou.db")
