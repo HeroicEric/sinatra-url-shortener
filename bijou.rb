@@ -5,10 +5,6 @@ require 'haml'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/bijou.db")
 
-	
-# Require Models
-Dir.glob("#{Dir.pwd}/models/*.rb") { |m| require "#{m.chomp}" }
-
 set :haml, :format => :html5 # default for Haml format is :xhtml
 
 class Link
@@ -34,10 +30,6 @@ class Link
 
   def bijou
     "<a href='/#{short_url}'>Bijou!</a>"
-  end
-
-  def base_url
-    "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
   end
 end
 
