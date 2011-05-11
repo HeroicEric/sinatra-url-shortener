@@ -1,3 +1,3 @@
-require 'bijou'
+require 'shortener'
 
 run Sinatra::Application
