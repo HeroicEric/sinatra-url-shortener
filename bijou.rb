@@ -3,14 +3,14 @@ require 'sinatra'
 require 'datamapper'
 require 'haml'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/bijou.db")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/database.db")
 
 set :haml, :format => :html5 # default for Haml format is :xhtml
 
 class Link
   include DataMapper::Resource
 
-  property :long_url,   String
+  property :long_url,   String, :length => 1024
   property :short_url,  String, :key => true
   property :created_at, DateTime
 
