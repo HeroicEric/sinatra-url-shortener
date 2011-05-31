@@ -1,2 +1,8 @@
-%p
-  Go ahead and try it already!
+%h1 Eric Kelly's URL Shortener
+%h4 I saw other people that had their own and I was jealous, so I made my own using <a href="http://sinatrarb.com">Sinatra</a>.
+
+%p Type a long URL into the box below and it will magically be shortened!
+
+%form(action="/url" method="POST")
+  %input#long-url(type="text" name="url" placeholder="http://")
+  %input(type="submit" value="Shorten")

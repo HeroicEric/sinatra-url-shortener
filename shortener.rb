@@ -2,44 +2,16 @@ require 'rubygems'
 require 'sinatra'
 require 'datamapper'
 require 'haml'
+require 'rack-flash'
+
+# Require Models
+Dir.glob("#{Dir.pwd}/models/*.rb") { |m| require "#{m.chomp}" }
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/database.db")
 
+use Rack::Flash
+enable :sessions
 set :haml, :format => :html5 # default for Haml format is :xhtml
-
-class Link
-  include DataMapper::Resource
-
-  property :long_url,   String, :length => 1024
-  property :short_url,  String, :key => true
-  property :created_at, DateTime
-
-  def self.valid_url?
-    long_url.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix)
-  end
-
-  def self.gen_short_url
-    # Create an Array of possible characters
-    chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
-    tmp = chars[rand(62)] + chars[rand(62)] + chars[rand(62)]
-
-    while Link.get(tmp)
-      puts "Tried " + tmp
-      tmp = chars[rand(62)] + chars[rand(62)] + chars[rand(62)]
-      puts "tmp is now " + tmp
-    end
-
-    tmp
-  end
-
-  def bijou
-    "<a href='/#{short_url}'>Bijou!</a>"
-  end
-end
-
-#################
-## Routes #######
-#################
 
 get '/' do
   haml :index
@@ -55,12 +27,11 @@ end
 post '/url' do
   @link = Link.new(:long_url => params[:url], :short_url => Link.gen_short_url)
 
-  puts @link.long_url
-
   if @link.save
     status 201 # Link saved successfully
     redirect '/url/' + @link.short_url
   else
+    flash[:error]="Please enter a valid URL."
     status 400 # Bad Request
     haml :index
   end
@@ -80,6 +51,7 @@ get %r{/new/(.+)} do
     status 201 # Link saved successfully
     redirect '/url/' + @link.short_url
   else
+    flash[:error]="Please enter a valid URL."
     status 400 # Bad Request
     haml :index
   end

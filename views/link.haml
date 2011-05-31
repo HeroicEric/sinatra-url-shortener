@@ -1,11 +1,10 @@
-%h2 Your new Bijou!
+%h2 Your link has been shortened!
 %p
-  <a href="#{@link.long_url}">#{@link.long_url}</a> can now also be accessed via it's #{@link.bijou}
-
+  <a href="#{@link.long_url}">#{@link.long_url}</a> can now also be accessed via <a href="#{@link.short_url}">eric.ly/#{@link.short_url}</a>
 %ul
   %li
     Original URL:
     %a(href="#{@link.long_url}") #{@link.long_url}
   %li
     Bijou URL:
-    %a(href="/#{@link.short_url}") erickel.ly/#{@link.short_url}
+    %a(href="/#{@link.short_url}") eric.ly/#{@link.short_url}
