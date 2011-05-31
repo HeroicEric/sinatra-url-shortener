@@ -1,7 +1,9 @@
 source :rubygems
 
 gem 'sinatra'
-gem 'datamapper'
+gem 'dm-core'
+gem 'dm-postgres-adapter'
+gem 'dm-migrations'
+gem 'dm-validations'
 gem 'haml'
-gem 'dm-sqlite-adapter'
 gem 'rack-flash'

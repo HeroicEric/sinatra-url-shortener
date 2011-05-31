@@ -2,7 +2,10 @@ require 'rubygems'
 require 'bundler/setup'
 
 require 'sinatra'
-require 'datamapper'
+require 'dm-core'
+require 'dm-postgres-adapter'
+require 'dm-migrations'
+require 'dm-validations'
 require 'haml'
 require 'rack-flash'
 
