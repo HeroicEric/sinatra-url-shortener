@@ -1,6 +1,7 @@
 source :rubygems
 
 gem 'sinatra'
+gem 'dm-sqlite-adapter'
 gem 'dm-core'
 gem 'dm-postgres-adapter'
 gem 'dm-migrations'
