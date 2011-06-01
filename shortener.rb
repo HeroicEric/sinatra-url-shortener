@@ -68,7 +68,7 @@ get %r{/api/url=(.+)} do
 
   if @link.save
     status 201 # Link saved successfully
-    return 'http://erickel.ly/' + @link.short_url
+    return 'http://eric.ly/' + @link.short_url
   else
     flash[:error]="Please enter a valid URL."
     status 400 # Bad Request
