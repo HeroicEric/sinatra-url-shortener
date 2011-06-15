@@ -1,14 +1,6 @@
 require 'rubygems'
-require 'bundler/setup'
-
-require 'sinatra'
-require 'dm-sqlite-adapter'
-require 'dm-core'
-require 'dm-postgres-adapter'
-require 'dm-migrations'
-require 'dm-validations'
-require 'haml'
-require 'rack-flash'
+require 'bundler'
+Bundler.require
 
 # Require Models
 Dir.glob("#{Dir.pwd}/models/*.rb") { |m| require "#{m.chomp}" }
