@@ -55,19 +55,6 @@ get %r{/new/(.+)} do
   end
 end
 
-get %r{/api/url=(.+)} do
-  @link = Link.new(:long_url => params[:captures], :short_url => Link.gen_short_url)
-
-  if @link.save
-    status 201 # Link saved successfully
-    return 'http://eric.ly/' + @link.short_url
-  else
-    flash[:error]="Please enter a valid URL."
-    status 400 # Bad Request
-    return 'The URL you entered was invalid.'
-  end
-end
-
 # Finalize/initialize DB
 DataMapper.finalize
 DataMapper::auto_upgrade!
